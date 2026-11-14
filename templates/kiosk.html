@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="30">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Attendance Kiosk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="kiosk-bg">
+    <div class="card">
+        <h1>Scan to Clock In / Out</h1>
+        <p class="subtitle">Point your phone camera at the QR code below</p>
+        <div class="qr-frame">
+            <img src="data:image/png;base64,{{ qr_b64 }}" alt="Attendance QR Code">
+        </div>
+        <div class="url-box">
+            Test Link: <a href="{{ checkin_url }}" target="_blank">{{ checkin_url }}</a>
+        </div>
+        <p class="refresh-note">Code refreshes automatically every 30 seconds</p>
+    </div>
+    <div class="admin-link">
+        <a href="/admin" target="_blank">Open HR Attendance Logs &rarr;</a>
+    </div>
+</body>
+</html>

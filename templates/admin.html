@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Attendance Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header-bar">
+            <div>
+                <h1>Attendance Logs</h1>
+                <p class="subtitle" style="margin-bottom:0;">Stored in <code>data/attendance_log.csv</code></p>
+            </div>
+            <a href="/">&larr; Back to Kiosk</a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    {% for h in headers %}
+                        <th>{{ h }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% if records %}
+                    {% for row in records %}
+                        <tr>
+                            <td>{{ row[0] }}</td>
+                            <td><strong>{{ row[1] }}</strong></td>
+                            <td>{{ row[2] }}</td>
+                            <td>
+                                {% if row[3] == 'IN' %}
+                                    <span class="badge-in">IN</span>
+                                {% else %}
+                                    <span class="badge-out">OUT</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align:center; color:#64748b;">No attendance records yet.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

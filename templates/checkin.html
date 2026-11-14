@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Check-In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="card">
+        {% if expired %}
+            <div class="alert-error">
+                <strong>QR Code Expired</strong><br>
+                Please scan the kiosk screen again.
+            </div>
+        {% elif success %}
+            <div class="alert-success">
+                <h2>Recorded Successfully</h2>
+                <p style="margin-top:8px;"><strong>{{ success.name }}</strong> ({{ success.emp_id }})</p>
+                <p>Action: <strong>{{ success.action }}</strong></p>
+                <p style="font-size:13px; margin-top:6px;">{{ success.timestamp }}</p>
+            </div>
+        {% else %}
+            <h1>Employee Attendance</h1>
+            <p class="subtitle">Sample IDs: EMP01, EMP02, EMP03, EMP04</p>
+            {% if error %}
+                <div class="alert-error">{{ error }}</div>
+            {% endif %}
+            <form method="POST">
+                <input type="text" name="emp_id" placeholder="Enter Employee ID" required autocomplete="off">
+                <div class="btn-group">
+                    <button type="submit" name="action" value="IN" class="btn-in">Clock IN</button>
+                    <button type="submit" name="action" value="OUT" class="btn-out">Clock OUT</button>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</body>
+</html>
