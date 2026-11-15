@@ -12,7 +12,7 @@ from utils import (
 
 app = Flask(__name__)
 LOCAL_IP = get_local_ip()
-PORT = 5000
+PORT = 5050
 
 init_storage()
 
